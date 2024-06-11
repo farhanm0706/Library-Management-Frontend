@@ -1,0 +1,9 @@
+<div class="modal">
+    <div class="modal-content" [ngClass]="{ 'success': success, 'error': !success }">
+
+        <p>{{ message }}</p>
+        <div class="actions">
+            <button class="btn btn-success" (click)="onCloseClick()">OK</button>
+        </div>
+    </div>
+</div>

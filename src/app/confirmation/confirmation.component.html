@@ -1,0 +1,12 @@
+<div class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="onClickCancel()">&times;</span>
+      <h2>Are you sure?</h2>
+      <p>Do you really want to delete this book? This process cannot be undone.</p>
+      <div class="actions">
+        <button class="btn btn-primary" (click)="onClickCancel()">No</button>
+        <button class="btn btn-danger" (click)="onClickDelete()">Yes</button>
+      </div>
+    </div>
+  </div>
+  

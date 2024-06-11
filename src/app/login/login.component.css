@@ -1,0 +1,52 @@
+/* src/app/login/login.component.css */
+.container1{
+  background: url(../../assets/library-shelf2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; 
+  opacity: 0.5;
+}
+.container {
+    margin-top: 50px;
+    
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2; /* Ensure login content appears above the image */
+    
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+
+  .message-box {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    /* position: absolute; */
+  }
+  
+  .success {
+    background-color: #4caf50; /* Green background */
+    color: white; /* White text */
+  }
+  
+  .error {
+    background-color: #f44336; /* Red background */
+    color: white; /* White text */
+  }
+  

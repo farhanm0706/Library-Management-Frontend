@@ -1,0 +1,228 @@
+<div class="container-fluid">
+    <div class="mb-3 nav-bar">
+      <a class="nav-left" [class.active]="activeLink === 'welcome'" class="dashboard-bd" (click)="selectTab('welcome')">ADMIN DASHBOARD</a>
+      <ul class="nav-right">
+        <li class="item" [class.active]="activeLink === 'add-books'"><a (click)="selectTab('add-books')">ADD BOOK</a></li>
+        <li class="item" [class.active]="activeLink === 'book-list'"><a (click)="selectTab('book-list')">BOOK LIST</a></li>
+        <li class="item" [class.active]="activeLink === 'view-users'"><a (click)="selectTab('view-users')">VIEW USERS</a></li>
+        <li class="item" [class.active]="activeLink === 'view-transactions'"><a   (click)="selectTab('view-transactions')">VIEW TRANSACTIONS</a></li>
+        <li class="item" [class.active]="activeLink === 'edit-profile'"><a (click)="selectTab('edit-profile')">EDIT PROFILE</a></li>
+        <li class="item" [class.active]="activeLink === 'logout'"><a (click)="selectTab('logout')">LOGOUT</a></li>
+      </ul>
+    </div>
+  
+</div> 
+<div class="main-center" *ngIf="selectedTab === 'welcome'"  >
+    <div class="img-container">
+        <img src="../../../assets/admin-welcome.jpg" alt="">
+    </div>
+    <div class="main-left"> Welcome {{displayedText  |titlecase }}!!</div>
+    <div class="main-second row">
+        
+        <div class="first-section col">
+            <img src="../../../assets/icons8-add-book-100.png" alt="">
+            <div>As an administrator, you have the ability to add new books to our collection</div>
+        </div>
+        <div class="first-section col">
+            <img src="../../../assets/icons8-book-shelf-100.png" alt="">
+            <div>Use book list to view, edit and delete the books added.</div>
+            
+        </div>
+        <div class="first-section col">
+            <img src="../../../assets/icons8-street-view-100.png" alt="">
+            <div>The ability to view all registered users in the system.  along with their details.</div>
+        </div>
+        <div class="first-section col">
+            <img src="../../../assets/icons8-transactions-64.png" alt="">
+            <div>You can view the detailed borrowing and returning activity of all registered users. </div>
+        </div>
+        
+    </div>
+    <div class="main-third row">
+        <div class="col text-center">
+            <img src="../../../assets/icons8-book-64.png" alt="" style="height: 80px;">
+            <div style="text-align:left;margin-left:20px;">
+                Library Timings
+            </div>
+            <br>
+            <div style="text-align:left;margin-left:20px;">
+                <div>Working Days:Monday-Saturday 8.00am-9.00pm</div>
+                <div>Closed :Sundays and Public Holidays</div>
+            </div>
+
+        </div>
+        <div class="col">
+            <div>Our Mission</div>
+            <hr>
+            <div>To provide accessible and comprehensive library services to our community.
+                To inspire and support lifelong learning, literacy, and a love for reading.</div>
+                
+
+        </div>
+        <div class="col">
+            <div>Contact Us</div>
+            <hr>
+            <div>Email: Library.learn@gmail.com</div>
+            <div>Phone : 0806346000</div>
+
+
+        </div>
+    </div>
+</div>
+
+<main class="col-md-12 ml-sm-auto col-lg-12 px-md-4 main-container">
+
+    
+    <div *ngIf="noData" class="pt-3 pb-2 mb-3 border-bottom sub-container">
+        <div>
+            Please perform some actions to show Data
+        </div>
+    </div>
+    <div *ngIf="selectedTab === 'add-books'" class="pt-3 pb-2 mb-3 border-bottom sub-container">
+        <h3 class="fw-bold">ADD BOOK</h3>
+        <hr>
+        <form #addBookForm="ngForm" (ngSubmit)="addBook(addBookForm)">
+            <div class="form-group">
+                <label for="bookName">Book Name</label>
+                <input type="text" id="bookName" [(ngModel)]="bookName" name="bookName" class="form-control" required minlength="3" #bookNameCtrl="ngModel">
+                <div *ngIf="bookNameCtrl.invalid && (bookNameCtrl.dirty || bookNameCtrl.touched)">
+                  <small class="text-danger" *ngIf="bookNameCtrl.errors?.['required']">Book Name is required</small>
+                  <small class="text-danger" *ngIf="bookNameCtrl.errors?.['minlength']">Book Name must be at least 3 characters long</small>
+                </div>
+              </div>
+            
+              <div class="form-group">
+                <label for="authorName">Author Name</label>
+                <input type="text" id="authorName" [(ngModel)]="authorName" name="authorName" class="form-control" required pattern="[a-zA-Z ]*" minlength="3" #authorNameCtrl="ngModel">
+                <div *ngIf="authorNameCtrl.invalid && (authorNameCtrl.dirty || authorNameCtrl.touched)">
+                  <small class="text-danger" *ngIf="authorNameCtrl.errors?.['required']">Author Name is required</small>
+                  <small class="text-danger" *ngIf="authorNameCtrl.errors?.['pattern']">Author Name can only contain alphabetic characters</small>
+                  <small class="text-danger" *ngIf="authorNameCtrl.errors?.['minlength']">Author Name must be at least 3 characters long</small>
+                </div>
+              </div>
+          
+            <div class="form-group">
+              <label for="imageUrl">Image URL</label>
+              <input type="url" id="imageUrl" [(ngModel)]="imageUrl" name="imageUrl" class="form-control" required pattern="https?://.+(\.jpg|\.jpeg|\.png|\.gif)$" #imageUrlCtrl="ngModel">
+              <div *ngIf="imageUrlCtrl.invalid && (imageUrlCtrl.dirty || imageUrlCtrl.touched)">
+                <small class="text-danger" *ngIf="imageUrlCtrl.errors?.['required']">Image URL is required</small>
+                <small class="text-danger" *ngIf="imageUrlCtrl.errors?.['pattern']">Image URL must be a valid URL ending in .jpg, .jpeg, .png, or .gif</small>
+              </div>
+            </div>
+          
+            <button type="submit" class="btn btn-primary d-block m-auto" [disabled]="addBookForm.invalid">Add Book</button>
+          </form>
+          
+    </div>
+
+
+    <div *ngIf="selectedTab === 'book-list'" class="pt-3 pb-2 mb-3 border-bottom sub-container1">
+        <h3 class="text-center fw-bold "> BOOK LIST</h3>
+        <ul class="list-group container text-center">
+            <li
+                class="list-group-item d-flex row align-items-start justify-content-between align-items-center fw-bold">
+                <span class="col">Book</span>
+                <span class="col">Book Name</span>
+                <span class="col">Author Name</span>
+                <span class="col">Action</span>
+            </li>
+            <li *ngFor="let book of books"
+                class="list-group-item d-flex row align-items-start justify-content-between align-items-center">
+                <span class="col">
+                    <img src="{{book.imageUrl}}" alt="Image can't be loaded ">
+                </span>
+                <span class="col  text-wrap">{{ book.bookname }} </span>
+                <span class="col text-wrap">{{ book.authorname }}</span>
+                <span class="col"><button class="btn btn-sm btn-primary btn-right-mg"
+                        (click)="editBook(book)">Edit</button>
+                    <button class="btn btn-sm btn-danger btn-right-mg"
+                        (click)="openDeleteconfirmation(book)">Delete</button></span>
+
+            </li>
+        </ul>
+    </div>
+    <app-confirmation *ngIf="showDialog" (confirmDelete)="onDialogClose($event)"></app-confirmation>
+    <app-message-dialog *ngIf="showMessageDialog" [message]="message" [success]="success"
+        (closeDialog)="onCloseMessageDialog()"></app-message-dialog>
+    <div *ngIf="selectedTab === 'view-users'" class="pt-3 pb-2 mb-3 border-bottom sub-container1">
+        <h3 class="fw-bold">VIEW USERS</h3>
+        <ul class="list-group text-center">
+            <li class="list-group-item  fw-bold">
+                <span class="col">User Name</span>
+                <span class="col">User Email Address</span>
+                <span class="col">User Role</span>
+                <span class="col">Borrowed Books</span>
+            </li>
+            <li *ngFor="let user of users" class="list-group-item">
+                <span class="col">{{ user.username |titlecase}} </span>
+                <span class="col">{{ user.email}}</span>
+                <span class="col">{{ user.role | titlecase}}</span>
+                <span class="col">{{ user.
+                    borrowedBooks.length }}</span>
+               
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="selectedTab === 'view-transactions'" class="pt-3 pb-2 mb-3 border-bottom sub-container1">
+        <h3 class="fw-bold">TRANSACTIONS</h3>
+        <ul class="list-group text-center">
+            <li class="list-group-item  fw-bold">
+                <span class="col">Book Name</span>
+                <span class="col">Author Name</span>
+                <span class="col">User Name</span>
+                <span class="col">Borrowed Date</span>
+                <span class="col">Return Date</span>
+            </li>
+            <li *ngFor="let user of transactionsList">
+              
+                  <span *ngFor="let transaction of user.transactions" class="list-group-item d-flex row align-items-start justify-content-between align-items-center ml-mr">
+                    <span class="col">{{ transaction.bookname }}</span>
+                    <span class="col">{{ transaction.authorname }}</span>
+                    <span class="col">{{ user.username }}</span>
+                    <span class="col">{{ transaction.borrowedDate | date:'dd-MM-yyyy' }}</span>
+                    <span class="col">{{ transaction.returnedDate | conditionalDate }}</span>
+                  </span>
+                
+              </li>
+          
+        </ul>
+    </div>
+
+
+   
+        
+    <div *ngIf="selectedTab === 'edit-profile'" class="pt-3 pb-2 mb-3 border-bottom sub-container">
+        <h3 class="fw-bold">EDIT PROFILE</h3>
+        <hr>
+        <form #editProfileForm="ngForm" (ngSubmit)="editProfile(editProfileForm)">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" [(ngModel)]="userEmail" name="email" class="form-control" required readOnly>
+            </div>
+            
+            
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" [(ngModel)]="username" name="username" class="form-control" required pattern="[a-zA-Z ]*" minlength="3" #usernameCtrl="ngModel">
+              <div *ngIf="usernameCtrl.invalid && (usernameCtrl.dirty || usernameCtrl.touched)">
+                <small class="text-danger" *ngIf="usernameCtrl.errors?.['required']">Username is required</small>
+                <small class="text-danger" *ngIf="usernameCtrl.errors?.['pattern']">User Name can only contain alphabetic characters</small>
+                <small class="text-danger" *ngIf="usernameCtrl.errors?.['minlength']">User Name must be at least 3 characters long</small>
+              </div>
+            </div>
+          
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required minlength="6" #passwordCtrl="ngModel">
+              <div *ngIf="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)">
+                <small class="text-danger" *ngIf="passwordCtrl.errors?.['required']">Password is required</small>
+                <small class="text-danger" *ngIf="passwordCtrl.errors?.['minlength']">Password must be at least 6 characters long</small>
+              </div>
+            </div>
+          
+            <button type="submit" class="btn btn-primary d-block m-auto" [disabled]="editProfileForm.invalid">UPDATE</button>
+          </form>
+    </div>
+</main>
+
+

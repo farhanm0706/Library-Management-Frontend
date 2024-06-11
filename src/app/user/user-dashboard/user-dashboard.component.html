@@ -1,0 +1,198 @@
+<div class="container-fluid">
+    <div class="mb-3 nav-bar">
+      <a class="nav-left" (click)="setActive('welcome-page')">USER DASHBOARD</a>
+      <ul class="nav-right">
+        <li class="item" [class.active]="activeLink === 'bookShelf'"><a   (click)="setActive('bookShelf')">BOOK SHELF</a></li>
+        <li class="item" [class.active]="activeLink === 'favorites'"><a   (click)="setActive('favorites')">FAVORITES</a></li>
+        <li class="item" [class.active]="activeLink === 'borrowedBook'"><a   (click)="setActive('borrowedBook')">BORROWED BOOK</a></li>
+        <li class="item" [class.active]="activeLink === 'edit-profile'"><a   (click)="setActive('edit-profile')">PROFILE</a></li>
+        <li class="item" [class.active]="activeLink === 'logout'"><a   (click)="setActive('logout')">LOGOUT</a></li>
+      </ul>
+    </div>
+  
+</div> 
+
+<div>
+    <div *ngIf="message" [ngClass]="messageType" class="message-box">
+        {{ message }}
+      </div>
+   
+      <div class="main-center" *ngIf="selectedTab === 'welcome-page'"  >
+        <div class="img-container">
+            <img src="../../../assets/lib-img.jpg" alt="">
+        </div>
+        <div class="main-left"> Welcome {{displayedText}}</div>
+        <div class="main-second row">
+            
+            <div class="first-section col">
+                <img src="../../../assets/icons8-book-shelf-100.png" alt="">
+                <div>Discover a world of knowledge and adventure.
+                    Explore our extensive collection of books in the book self.</div>
+            </div>
+            <div class="first-section col">
+                <img src="../../../assets/icons8-book-85.png" alt="">
+                <div>Use our book shelf to search and 
+                    click the "Borrow" button.It will be added to your borrowed books section.</div>
+                
+            </div>
+            <div class="first-section col">
+                <img src="../../../assets/icons8-favorites-100.png" alt="">
+                <div>You can add books to favorites section to borrow in near future.</div>
+            </div>
+            <div class="first-section col">
+                <img src="../../../assets/icons8-return-64.png" alt="">
+                <div>Go to My Borrowed Books.Click the Return button next to the book you wish to return.</div>
+            </div>
+            
+        </div>
+        <div class="main-third row">
+            <div class="col text-center">
+                <img src="../../../assets/icons8-book-64.png" alt="" style="height: 80px;">
+                <div style="text-align:left;margin-left:20px;">
+                    Library Timings
+                </div>
+                <br>
+                <div style="text-align:left;margin-left:20px;">
+                    <div>Working Days:Monday-Saturday 8.00am-9.00pm</div>
+                    <div>Closed :Sundays and Public Holidays</div>
+                </div>
+
+            </div>
+            <div class="col">
+                <div>Our Mission</div>
+                <hr>
+                <div>To provide accessible and comprehensive library services to our community.
+                    To inspire and support lifelong learning, literacy, and a love for reading.</div>
+                    
+
+            </div>
+            <div class="col">
+                <div>Contact Us</div>
+                <hr>
+                <div>Email: Library.learn@gmail.com</div>
+                <div>Phone : 0806346000</div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<main class="col-md-12 ml-sm-auto col-lg-12 px-md-4 main-container">
+
+
+  
+<div *ngIf="selectedTab === 'bookShelf'" class="pt-3 pb-2 mb-3 border-bottom sub-container1">
+    <h3 class="text-center fw-bold"> BOOK LIST</h3>
+    <ul class="list-group container text-center">
+        <li
+            class="list-group-item d-flex row align-items-start justify-content-between align-items-center fw-bold">
+            <span class="col">Book</span>
+            <span class="col">Book Name</span>
+            <span class="col">Author Name</span>
+            <span class="col">Action</span>
+        </li>
+        <li *ngFor="let book of books"
+            class="list-group-item d-flex row align-items-start justify-content-between align-items-center">
+            <span class="col">
+                <img src="{{book.imageUrl}}" alt="Image can't be loaded ">
+            </span>
+            <span class="col  text-wrap">{{ book.bookname }} </span>
+            <span class="col text-wrap">{{ book.authorname }}</span>
+            <span class="col"><button class="btn btn-sm btn-primary btn-right-mg"
+                    (click)="borrowBook(book)">Borrow</button>
+                <button class="btn btn-sm btn-danger btn-right-mg"
+                    (click)="addToFav(book)">Fav</button></span>
+
+        </li>
+    </ul>
+</div>
+<div *ngIf="selectedTab === 'borrowedBook'" class="pt-3 pb-2 mb-3 border-bottom sub-container1">
+    <h3 class="text-center fw-bold"> BORROWED BOOKS</h3>
+    <ul class="list-group container text-center">
+        <li
+            class="list-group-item d-flex row align-items-start justify-content-between align-items-center fw-bold">
+            <span class="col">Book</span>
+            <span class="col">Book Name</span>
+            <span class="col">Author Name</span>
+            <span class="col">Return Date</span>
+            <span class="col">Action</span>
+        </li>
+        <li *ngFor="let book of borrowedBooks"
+            class="list-group-item d-flex row align-items-start justify-content-between align-items-center">
+            <span class="col">
+                <img src="{{book.imageUrl}}" alt="Image can't be loaded ">
+            </span>
+            <span class="col  text-wrap">{{ book.bookname }} </span>
+            <span class="col text-wrap">{{ book.authorname }}</span>
+            <span class="col text-wrap">{{ book.borrowedDate | date:'dd-MM-yyyy' }}</span>
+            <span class="col"><button class="btn btn-sm btn-primary btn-right-mg"
+                    (click)="returnBook(book)">Return</button>
+                </span>
+
+        </li>
+    </ul>
+</div>
+<div *ngIf="selectedTab === 'favorites'" class="pt-3 pb-2 mb-3 border-bottom sub-container1">
+    <h3 class="text-center fw-bold"> YOUR FAVORITES</h3>
+    <ul class="list-group container text-center">
+        <li
+            class="list-group-item d-flex row align-items-start justify-content-between align-items-center fw-bold">
+            <span class="col">Book</span>
+            <span class="col">Book Name</span>
+            <span class="col">Author Name</span>
+            <span class="col">Action</span>
+        </li>
+        <li *ngFor="let book of favoriteBooks"
+            class="list-group-item d-flex row align-items-start justify-content-between align-items-center">
+            <span class="col">
+                <img src="{{book.imageUrl}}" alt="Image can't be loaded ">
+            </span>
+            <span class="col  text-wrap">{{ book.bookname }} </span>
+            <span class="col text-wrap">{{ book.authorname }}</span>
+            <span class="col"><button class="btn btn-sm btn-primary btn-right-mg"
+                    (click)="borrowBook(book)">Borrow</button>
+                <button class="btn btn-sm btn-link btn-right-mg"
+                    (click)="removeFromFav(book)">Remove</button></span>
+
+        </li>
+    </ul>
+</div>
+<div *ngIf="selectedTab === 'edit-profile'" class="pt-3 pb-2 mb-3 border-bottom sub-container">
+    <h3 class="fw-bold">EDIT PROFILE</h3>
+    <hr>
+   
+
+    <form #editProfileForm="ngForm" (ngSubmit)="editProfile(editProfileForm)">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" [(ngModel)]="userEmail" name="email" class="form-control" required readOnly>
+        </div>
+        
+      
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" [(ngModel)]="username" name="username" class="form-control" required pattern="[a-zA-Z ]*" #usernameCtrl="ngModel">
+          <div *ngIf="usernameCtrl.invalid && (usernameCtrl.dirty || usernameCtrl.touched)">
+            <small class="text-danger" *ngIf="usernameCtrl.errors?.['required']">Username is required</small>
+            <small class="text-danger" *ngIf="usernameCtrl.errors?.['pattern']">User Name can only contain alphabetic characters</small>
+            <small class="text-danger" *ngIf="usernameCtrl.errors?.['minlength']">User Name must be at least 3 characters long</small>
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required minlength="6" #passwordCtrl="ngModel">
+          <div *ngIf="passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)">
+            <small class="text-danger" *ngIf="passwordCtrl.errors?.['required']">Password is required</small>
+            <small class="text-danger" *ngIf="passwordCtrl.errors?.['minlength']">Password must be at least 6 characters long</small>
+          </div>
+        </div>
+      
+        <button type="submit" class="btn btn-primary d-block m-auto" [disabled]="editProfileForm.invalid">UPDATE</button>
+      </form>
+      
+      
+</div>
+
+
+</main>

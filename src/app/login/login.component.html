@@ -1,0 +1,93 @@
+
+<div class="container1">
+
+</div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <h2 class="text-center" *ngIf="isLoginMode">LOGIN</h2>
+            <h2 class="text-center" *ngIf="!isLoginMode">REGISTER</h2>
+            <div *ngIf="message" [ngClass]="messageType" class="message-box">
+                {{ message }}
+            </div>
+            
+                
+            <form #loginForm="ngForm" *ngIf="isLoginMode" (ngSubmit)="onLogin(loginForm)">
+                <div class="form-group">
+                  <label for="loginEmail">Email</label>
+                  <input type="email" class="form-control" placeholder="Enter Email Address" id="loginEmail" [(ngModel)]="loginEmail"
+                    name="loginEmail" required email #email="ngModel">
+                  <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <small class="text-danger" *ngIf="email.errors?.['required']">Email is required</small>
+                    <small class="text-danger" *ngIf="email.errors?.['email']">Email must be a valid email address</small>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="loginPassword">Password</label>
+                  <input type="password" class="form-control" placeholder="Enter Password" id="loginPassword" [(ngModel)]="loginPassword"
+                    name="loginPassword" required minlength="6" #password="ngModel">
+                  <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <small class="text-danger" *ngIf="password.errors?.['required']">Password is required</small>
+                    <small class="text-danger" *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long</small>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">LOGIN</button>
+                <button type="button" class="btn btn-link btn-block" (click)="switchMode()">REGISTER</button>
+              </form>
+              
+          
+            <form #registrationForm="ngForm" *ngIf="!isLoginMode" (ngSubmit)="onRegister(registrationForm)">
+                <div class="form-group">
+                  <label for="registerUsername">Username</label>
+                  <input type="text" class="form-control" id="registerUsername" placeholder="Enter User Name" [(ngModel)]="registerUsername"
+                    name="registerUsername" required pattern="[a-zA-Z ]*" minlength="3" #username="ngModel">
+                  <div *ngIf="username.invalid && (username.dirty || username.touched)">
+                    <small class="text-danger" *ngIf="username.errors?.['required']">Username is required</small>
+                    <small class="text-danger" *ngIf="username.errors?.['pattern']">User Name can only contain alphabetic characters</small>
+
+                    <small class="text-danger" *ngIf="username.errors?.['minlength']">Username must be at least 3 characters long</small>
+                  </div>
+                </div>
+              
+                <div class="form-group">
+                  <label for="registeremail">Email</label>
+                  <input type="email" class="form-control" id="registeremail" placeholder="Enter Email Address" [(ngModel)]="registeremail"
+                    name="registeremail" required email #email="ngModel">
+                  <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <small class="text-danger" *ngIf="email.errors?.['required']">Email is required</small>
+                    <small class="text-danger" *ngIf="email.errors?.['email']">Email must be a valid email address</small>
+                  </div>
+                </div>
+              
+                <div class="form-group">
+                  <label for="registerPassword">Password</label>
+                  <input type="password" class="form-control" id="registerPassword" placeholder="Enter the password" [(ngModel)]="registerPassword"
+                    name="registerPassword" required minlength="6" #password="ngModel">
+                  <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <small class="text-danger" *ngIf="password.errors?.['required']">Password is required</small>
+                    <small class="text-danger" *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long</small>
+                  </div>
+                </div>
+              
+              
+              
+                <div class="form-group">
+                  <label for="registerRole">Role</label>
+                  <select class="form-control" id="registerRole" [(ngModel)]="registerRole" name="registerRole" required #role="ngModel">
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                  <div *ngIf="role.invalid && (role.dirty || role.touched)">
+                    <small class="text-danger" *ngIf="role.errors?.['required']">Role is required</small>
+                  </div>
+                </div>
+              
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="registrationForm.invalid">Register</button>
+                <button type="button" class="btn btn-link btn-block" (click)="switchMode()">Login</button>
+              </form>
+              
+        </div>
+    </div>
+</div>

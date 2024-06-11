@@ -1,0 +1,219 @@
+
+  
+  .nav-bar{
+        font-size:small;
+        margin-top: 1%;
+        /* background-color: aliceblue; */
+        padding: 1%;
+        padding-bottom: 2.5%;
+        position: fixed;
+        background-color: #364c64;
+        color: white;
+        width: 96vw;
+        height: 10%;
+        z-index: 1;
+    
+}
+.nav-right{
+    float: right;
+    width: 58%;
+    display: flex;
+    list-style: none;
+}
+
+.nav-right .item{
+    padding: 2%;
+    
+}
+.main-center{
+    height: 50%;
+}
+
+
+
+a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-right .item:hover{
+    font-weight: bold;
+    background-color: white;
+    color: black;
+  }
+
+  
+  .nav-right .item.active{
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    
+  }
+  /* .nav-right a{
+    color: wheat;
+  } */
+  
+.main-right {
+    width: 25%;
+    height: 78%;
+    margin-right: 15%;
+    border: 1px solid black;
+}
+
+.main-content{
+    padding: 2%;
+    width: 40%;
+    background: #cca8cc;
+    border-radius: 10px;
+    margin: auto;
+}
+.main-container{
+   
+    display: flex;
+    flex-direction: column;
+}
+.sub-container{
+    flex: 1;
+    margin: auto;
+    position: relative;
+    top: 100px;
+    background-color: white;
+    min-height: 80vh;
+    width: 40%;
+    padding: 2%;
+    border-radius: 9px;
+}
+.sub-container1{
+    flex: 1;
+    margin: auto;
+    position: absolute;
+    top: 12%;
+    background-color: white;
+    min-height: 80vh;
+    width: 96%;
+    padding: 2%;
+    border-radius: 9px;
+}
+ h3{
+    text-align: center;
+}
+
+
+  #navbarNav{
+    margin-right: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    min-width: 23%;
+  }
+  .btn-danger{
+    min-width: 23%;
+  }
+  
+
+  
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .list-group-item ul {
+    margin-top: 10px;
+  }
+
+  
+ .btn-right-mg{
+    margin-right: 10px;
+    margin-top: 5px;
+ }
+ img{
+   max-width: 21%;
+
+ }
+
+ .li-pd-right{ 
+    padding-right: 28%;
+ }
+
+ .ml-mr{
+    margin-left: auto;
+    margin-right: auto;
+ }
+ li{
+    list-style: none;
+ }
+
+
+ img{
+    min-height: 21%;
+ }
+
+ 
+  .img-container img{
+    background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-position: center;
+  max-height: 40vw;
+  min-width: 100%;
+  opacity: 0.5;
+}
+.main-left {
+    width: 31%;
+    position: absolute;
+    top: 32%;
+    left: 15%;
+    margin-left: 15%;
+    color: white;
+    font-size: 32px;
+}
+  .main-content{
+    padding: 2%;
+    width: 40%;
+    background: #cca8cc;
+    border-radius: 10px;
+    margin: auto;
+}
+.main-second{
+    width: 100.7%;
+    height: 50vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.main-third{
+    background-image: url(../../../assets/blue-designed-grunge-concrete-texture-vintage-background-with-space-text-image_1258-108928.avif);
+    background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-position: center;
+  color: white;
+    width: 100.7%;
+    height: 50vh;
+    display: flex;
+    text-align: left; 
+    justify-content: center;
+    align-items: center;
+}

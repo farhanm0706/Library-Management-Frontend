@@ -1,0 +1,37 @@
+<div class="container mt-2 sub-container">
+    <button class="btn btn-primary" (click)="goback()">Back</button>
+    <div *ngIf="message" [ngClass]="messageType" class="message-box">
+        {{ message }}
+      </div>
+    <div  class="pt-3 pb-2 mb-3 border-bottom">
+        <h3>Edit book</h3>
+        <form #editBookForm="ngForm" (ngSubmit)="updateBook(editBookForm)">
+          <div class="form-group py-md-2">
+            <label for="bookName">Book Name</label>
+            <input type="text" id="bookName" [(ngModel)]="bookData.bookname" name="bookName" class="form-control" required  minlength="3" #bookNameCtrl="ngModel">
+            <div *ngIf="bookNameCtrl.invalid && (bookNameCtrl.dirty || bookNameCtrl.touched)">
+                <small class="text-danger" *ngIf="bookNameCtrl.errors?.['required']">Book Name is required</small>
+                <small class="text-danger" *ngIf="bookNameCtrl.errors?.['minlength']">Book Name must be at least 3 characters long</small>
+              </div>
+          </div>
+          <div class="form-group py-md-2">
+            <label for="authorName">Author Name</label>
+            <input type="text" id="authorName" [(ngModel)]="bookData.authorname" name="authorName" class="form-control" required pattern="[a-zA-Z ]*" minlength="3" #authorNameCtrl="ngModel">
+            <div *ngIf="authorNameCtrl.invalid && (authorNameCtrl.dirty || authorNameCtrl.touched)">
+                <small class="text-danger" *ngIf="authorNameCtrl.errors?.['required']">Author Name is required</small>
+                <small class="text-danger" *ngIf="authorNameCtrl.errors?.['pattern']">Author Name can only contain alphabetic characters</small>
+                <small class="text-danger" *ngIf="authorNameCtrl.errors?.['minlength']">Author Name must be at least 3 characters long</small>
+              </div>
+          </div>
+          <div class="form-group py-md-2">
+            <label for="imageUrl">Image URL</label>
+            <input type="url" id="imageUrl" [(ngModel)]="bookData.imageUrl" name="imageUrl" class="form-control" required pattern="https?://.+(\.jpg|\.jpeg|\.png|\.gif)$" #imageUrlCtrl="ngModel">
+            <div *ngIf="imageUrlCtrl.invalid && (imageUrlCtrl.dirty || imageUrlCtrl.touched)">
+                <small class="text-danger" *ngIf="imageUrlCtrl.errors?.['required']">Image URL is required</small>
+                <small class="text-danger" *ngIf="imageUrlCtrl.errors?.['pattern']">Image URL must be a valid URL ending in .jpg, .jpeg, .png, or .gif</small>
+          </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3 ml-auto" [disabled]="editBookForm.invalid" >Update Book</button>
+        </form>
+      </div>
+</div>
