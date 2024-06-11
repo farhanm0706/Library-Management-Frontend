@@ -4,9 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 
-import { FormsModule} from '@angular/forms';
+
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
@@ -22,7 +22,6 @@ import { ConditionalDatePipe } from './conditional-date.pipe';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
     AdminDashboardComponent,
     UserDashboardComponent,
     WelcomeComponent,
@@ -38,6 +37,7 @@ import { ConditionalDatePipe } from './conditional-date.pipe';
     FormsModule,
     HttpClientModule,
     NoopAnimationsModule,
+    ReactiveFormsModule
     
   ],
   providers: [],
